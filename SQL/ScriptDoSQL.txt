@@ -1,0 +1,103 @@
+CRIAÇÃO DO BANCO - MYSQL
+
+
+CREATE DATABASE condominio;
+USE condominio;
+
+
+TABELAS
+	
+
+CREATE TABLE Unidade (
+    id_unidade INT PRIMARY KEY AUTO_INCREMENT,
+    num_unidade INT NOT NULL,
+    bloco VARCHAR(10),
+    tipo VARCHAR(30)
+);
+
+CREATE TABLE Aviso (
+    id_aviso INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    mensagem TEXT NOT NULL,
+    data_publicacao DATE NOT NULL
+);
+
+CREATE TABLE Reserva (
+    id_reserva INT PRIMARY KEY AUTO_INCREMENT,
+    data_reserva DATE NOT NULL,
+    horario_inicio TIME NOT NULL,
+    horario_fim TIME NOT NULL,
+    cpf_morador CHAR(11) NOT NULL,
+    id_area INT NOT NULL,
+    FOREIGN KEY (cpf_morador) REFERENCES Morador(cpf),
+    FOREIGN KEY (id_area) REFERENCES Area_Comum(id_area),
+    UNIQUE (id_area, data_reserva, horario_inicio, horario_fim)
+);
+
+CREATE TABLE Area_Comum (
+    id_area INT PRIMARY KEY AUTO_INCREMENT,
+    nome_area VARCHAR(50) NOT NULL,
+    descricao TEXT,
+    capacidade INT
+);
+
+CREATE TABLE Taxa (
+    id_taxa INT PRIMARY KEY AUTO_INCREMENT,
+    valor DECIMAL(10,2) NOT NULL,
+    data_vencimento DATE NOT NULL,
+    status_pagamento VARCHAR(20),
+    id_unidade INT NOT NULL,
+    FOREIGN KEY (id_unidade) REFERENCES Unidade(id_unidade)
+);
+
+CREATE TABLE Ocorrencia (
+    id_ocorrencia INT PRIMARY KEY AUTO_INCREMENT,
+    data_ocorrencia DATE NOT NULL,
+    descricao TEXT NOT NULL,
+    status VARCHAR(30),
+    id_unidade INT NOT NULL,
+    FOREIGN KEY (id_unidade) REFERENCES Unidade(id_unidade)
+);
+
+CREATE TABLE Morador (
+    cpf CHAR(11) PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20),
+    email VARCHAR(100),
+    id_unidade INT NOT NULL,
+    FOREIGN KEY (id_unidade) REFERENCES Unidade(id_unidade)
+);
+
+CREATE TABLE Bloco (
+    id_bloco INT AUTO_INCREMENT PRIMARY KEY,
+    nome_bloco VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Sindico (
+    id_sindico INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    senha VARCHAR(50) NOT NULL,
+    id_bloco INT UNIQUE,
+    FOREIGN KEY (id_bloco) REFERENCES Bloco(id_bloco)
+);
+
+
+ALTER TABLE Aviso
+ADD COLUMN id_sindico INT;
+
+ALTER TABLE Aviso
+ADD FOREIGN KEY (id_sindico) REFERENCES Sindico(id_sindico);
+
+ALTER TABLE Unidade
+DROP COLUMN bloco;
+
+ALTER TABLE Unidade
+ADD COLUMN id_bloco INT;
+
+ALTER TABLE Unidade
+ADD FOREIGN KEY (id_bloco) REFERENCES Bloco(id_bloco);
+
+
+ALTER TABLE taxa
+MODIFY status ENUM('PENDENTE','PAGA','ATRASADA','CANCELADA') NOT NULL;
