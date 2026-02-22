@@ -13,13 +13,17 @@ public class BlocoDAO {
     public static String blocoUsuario (int idBloco) {
         try {
             Connection con = Conexao.conectar();
-            String sql = "SELECT nome_bloco FROM bloco where id_bloco=? ";
+            String sql = "SELECT nome_bloco FROM bloco where id_bloco=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idBloco);
             ResultSet resultado = ps.executeQuery();
-            return resultado.getString("nome_bloco");
+            if (resultado.next()) {
+                return resultado.getString("nome_bloco");
+            } else {
+                return null; // não encontrou registro
+            }
         } catch (Exception e) {
-            return null;
+            return e.getMessage();
         }
     }
     

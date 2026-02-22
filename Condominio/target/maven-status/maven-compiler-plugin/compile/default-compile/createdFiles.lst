@@ -13,6 +13,7 @@ com\mycompany\condominio\view\TelaCriarReservas$4.class
 com\mycompany\condominio\Condominio.class
 com\mycompany\condominio\view\TelaInicial$5.class
 com\mycompany\condominio\view\TelaCadastrarMorador$5.class
+com\mycompany\condominio\dao\AvisosDAO.class
 com\mycompany\condominio\view\TelaInicial$10.class
 com\mycompany\condominio\view\TelaCriarAvisos$3.class
 com\mycompany\condominio\view\TelaCriarReservas.class
@@ -46,16 +47,21 @@ com\mycompany\condominio\view\TelaVerTaxas1$1.class
 com\mycompany\condominio\view\TelaCriarReservas$2.class
 com\mycompany\condominio\view\TelaCadastrarMorador$4.class
 com\mycompany\condominio\dao\SindicoDAO.class
+com\mycompany\condominio\view\TelaVerOcorrencias$4.class
 com\mycompany\condominio\view\TelaCriarAvisos$5.class
 com\mycompany\condominio\view\TelaCriarReservas$5.class
 com\mycompany\condominio\view\TelaLogin.class
 com\mycompany\condominio\view\TelaInicial$12.class
+com\mycompany\condominio\dao\UnidadeDAO.class
 com\mycompany\condominio\view\TelaCriarTaxas$1.class
 com\mycompany\condominio\view\TelaVerOcorrencias$1.class
 com\mycompany\condominio\view\TelaInicial$8.class
 com\mycompany\condominio\view\TelaCriarTaxas.class
 com\mycompany\condominio\view\TelaVerAvisos$2.class
+com\mycompany\condominio\view\TelaVerReservas$4.class
+com\mycompany\condominio\dao\MoradorDAO.class
 com\mycompany\condominio\view\TelaCriarAvisos.class
+com\mycompany\condominio\dao\AreaComumDAO.class
 com\mycompany\condominio\view\TelaCriarTaxas$4.class
 com\mycompany\condominio\view\TelaLogin$3.class
 com\mycompany\condominio\view\TelaInicial$3.class
@@ -69,6 +75,7 @@ com\mycompany\condominio\view\TelaCriarAvisos$1.class
 com\mycompany\condominio\view\TelaCriarReservas$1.class
 com\mycompany\condominio\view\TelaExcluirMorador.class
 com\mycompany\condominio\view\TelaVerAvisos$3.class
+com\mycompany\condominio\dao\StatusDAO.class
 com\mycompany\condominio\view\TelaInicial$6.class
 com\mycompany\condominio\view\TelaCadastrarMorador$1.class
 com\mycompany\condominio\view\TelaExcluirMorador$1.class

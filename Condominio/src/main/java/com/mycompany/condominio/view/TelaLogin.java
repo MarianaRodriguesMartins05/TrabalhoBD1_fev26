@@ -20,6 +20,14 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+        jLabel5.setSize(188, 100); 
+        jLabel4.setSize(188, 100); 
+        jLabel5.setIcon(new javax.swing.ImageIcon(
+        getClass().getResource("/imagens/painel_do_sindico.png")
+    ));
+        jLabel4.setIcon(new javax.swing.ImageIcon(
+        getClass().getResource("/imagens/imagemlogin.png")
+    ));
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -57,9 +65,6 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(44, 62, 80));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\marih\\Documents\\NetBeansProjects\\Condominio\\src\\Imagens\\painel_do_sindico.png")); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\marih\\Documents\\NetBeansProjects\\Condominio\\src\\Imagens\\imagemlogin.png")); // NOI18N
         jLabel4.setPreferredSize(new java.awt.Dimension(126, 126));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -211,8 +216,12 @@ public class TelaLogin extends javax.swing.JFrame {
                 /*JOptionPane.showMessageDialog(null, "Login realizado com sucesso");*/
                 // aqui você pode abrir outra tela
                 Parametro parametro = Parametro.getInstance();
+                System.out.println(rs.getInt("id_bloco"));
                 String bloco = BlocoDAO.blocoUsuario(rs.getInt("id_bloco"));
+                System.out.println(bloco);
                 parametro.setNomeBloco(bloco);
+                parametro.setIdBloco(rs.getInt("id_bloco"));
+                parametro.setIdSindico(rs.getInt("id_sindico"));
                 TelaInicial telaI = new TelaInicial();
                 telaI.setVisible(true);
                 this.dispose();     

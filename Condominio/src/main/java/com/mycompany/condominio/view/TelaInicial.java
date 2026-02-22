@@ -17,6 +17,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
+        System.out.println(Parametro.getInstance().getNomeBloco());
         jLabel2.setText(Parametro.getInstance().getNomeBloco());
         setResizable(false);
         setLocationRelativeTo(null);
@@ -270,6 +271,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        TelaLogin telalogin = new TelaLogin();
+        telalogin.setVisible(true);
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton17ActionPerformed
 

@@ -17,6 +17,15 @@ public class Parametro {
     private Integer idBloco;
     private String nomeBloco;
 
+    public Integer getIdSindico() {
+        return idSindico;
+    }
+
+    public void setIdSindico(Integer idSindico) {
+        this.idSindico = idSindico;
+    }
+    private Integer idSindico;
+
     //  construtor privado (ninguém pode dar new)
     private Parametro() {}
 
