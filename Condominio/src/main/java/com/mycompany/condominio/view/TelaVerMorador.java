@@ -4,6 +4,11 @@
  */
 package com.mycompany.condominio.view;
 import com.mycompany.condominio.dao.*;
+import com.mycompany.condominio.model.*;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +22,32 @@ public class TelaVerMorador extends javax.swing.JFrame {
     public TelaVerMorador() {
         initComponents();
         jLabel7.setText(Parametro.getInstance().getNomeBloco());
+        
+        
+        
         setResizable(false);
         setLocationRelativeTo(null);
     }
+    
+    public void carregarTabela(String nome) {
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        MoradorDAO dao = new MoradorDAO();
+        List<MoradorModel> lista = dao.listarPorNome(nome);
+        
+
+        for (MoradorModel m : lista) {
+            model.addRow(new Object[]{
+                m.getCpf(),
+                m.getNome(),
+                m.getTelefone(),
+                m.getEmail(),
+                m.getNumUnidade()
+            });
+        }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,7 +209,8 @@ public class TelaVerMorador extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String nome = jTextField2.getText();
+        //String nome = jTextField2.getText();
+        carregarTabela(jTextField2.getText());
         
         
 

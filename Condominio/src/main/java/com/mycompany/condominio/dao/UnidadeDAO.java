@@ -32,7 +32,7 @@ public class UnidadeDAO {
         return unidades;
     }
     
-    public static Integer bucarIdUnidade (int numUnidade) {
+    public static Integer buscarIdUnidade (int numUnidade) {
         Integer resultNumUnidade = null;
         try {
             Connection con = Conexao.conectar();

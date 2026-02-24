@@ -4,7 +4,9 @@
  */
 package com.mycompany.condominio.view;
 import com.mycompany.condominio.dao.*;
-
+import com.mycompany.condominio.model.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 /**
  *
  * @author marih
@@ -17,8 +19,26 @@ public class TelaVerAvisos extends javax.swing.JFrame {
     public TelaVerAvisos() {
         initComponents();
         jLabel7.setText(Parametro.getInstance().getNomeBloco());
+        carregarTabela();
         setResizable(false);
         setLocationRelativeTo(null);
+    }
+    
+    private void carregarTabela() {
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+
+        ArrayList<AvisoModel> lista = AvisosDAO.listarAvisos();
+
+        for (AvisoModel a : lista) {
+            modelo.addRow(new Object[]{
+                a.getTitulo(),
+                a.getMensagem(),
+                a.getData(),
+                a.getSindico()
+            });
+        }
     }
 
     /**

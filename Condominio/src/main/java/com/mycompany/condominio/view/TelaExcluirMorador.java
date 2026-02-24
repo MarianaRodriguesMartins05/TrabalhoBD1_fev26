@@ -6,6 +6,7 @@ package com.mycompany.condominio.view;
 import com.mycompany.condominio.dao.*;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,6 +51,7 @@ public class TelaExcluirMorador extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +122,9 @@ public class TelaExcluirMorador extends javax.swing.JFrame {
         jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(jList2);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Morador:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,7 +137,9 @@ public class TelaExcluirMorador extends javax.swing.JFrame {
                         .addComponent(jButton17))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(114, 114, 114)
-                        .addComponent(jLabel3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
@@ -162,7 +169,9 @@ public class TelaExcluirMorador extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(38, 38, 38)
@@ -191,10 +200,40 @@ public class TelaExcluirMorador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String unidadeStr = jList1.getSelectedValue();
+        
+        if (unidadeStr == null){
+            
+            JOptionPane.showMessageDialog(null,"Selecione uma unidade!");
+            return;
+        }
+        Integer unidade = Integer.parseInt(unidadeStr);
+        List<String> moradores = MoradorDAO.listarPorUnidade(unidade);// .unidadeBloco(Parametro.getInstance().getIdBloco());
+        DefaultListModel<String> modelo = new DefaultListModel<>();
+        for (String nome : moradores) {
+            modelo.addElement(nome);
+        }
+        jList2.setModel(modelo);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        String unidadeStr = jList1.getSelectedValue();
+        String morador = jList2.getSelectedValue();
+        
+        if (morador == null){
+            JOptionPane.showMessageDialog(null,"Selecione um morador!");
+            return;
+        }
+        Integer unidade = Integer.parseInt(unidadeStr);
+        if(MoradorDAO.deletarMorador(morador, unidade)){
+            JOptionPane.showMessageDialog(null,"Morador deletado com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null,"Erro ao deletar morador!");
+        }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -494,6 +533,7 @@ public class TelaExcluirMorador extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;

@@ -6,6 +6,9 @@ package com.mycompany.condominio.view;
 import com.mycompany.condominio.dao.*;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import com.mycompany.condominio.model.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -105,11 +108,11 @@ public class TelaVerOcorrencias extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Descrição", "Data", "Status", "Unidade"
+                "ID", "Descrição", "Data", "Unidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -195,6 +198,39 @@ public class TelaVerOcorrencias extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        OcorrenciaDAO dao = new OcorrenciaDAO();
+        List<OcorrenciaModel> lista;
+
+        String unidadeSelecionada = jList2.getSelectedValue();
+
+        if (unidadeSelecionada == null) {
+            lista = dao.buscarOcorrencias(null);
+        } else {
+            int numUnidade = Integer.parseInt(unidadeSelecionada);
+            Integer idUnidade = UnidadeDAO.buscarIdUnidade(numUnidade);
+            lista = dao.buscarOcorrencias(idUnidade);
+        }
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        for (OcorrenciaModel o : lista) {
+            model.addRow(new Object[]{
+                o.getIdOcorrencia(),
+                o.getDescricao(),      
+                o.getDataOcorrencia(),
+                o.getNumUnidade()
+            });
+        }
+
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Nenhuma ocorrência encontrada.",
+                "Resultado",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

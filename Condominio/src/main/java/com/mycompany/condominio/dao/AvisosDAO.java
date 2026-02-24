@@ -8,9 +8,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+import com.mycompany.condominio.model.*;
 
 /**
  *
@@ -36,6 +35,38 @@ public class AvisosDAO {
         } catch (Exception e) {
             return "Erro ao criar aviso: " + e.getMessage();
         }
+    }
+    
+    public static ArrayList<AvisoModel> listarAvisos() {
+
+        ArrayList<AvisoModel> lista = new ArrayList<>();
+
+        String sql = "SELECT a.titulo, a.mensagem, a.data_publicacao, s.nome FROM aviso a " +
+        "INNER JOIN sindico s ON a.id_sindico = s.id_sindico ORDER BY a.data_publicacao DESC";
+
+        try {
+            Connection con = Conexao.conectar();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                AvisoModel aviso = new AvisoModel(
+                    rs.getString("titulo"),
+                    rs.getString("mensagem"),
+                    rs.getDate("data_publicacao"),
+                    rs.getString("nome")
+                );
+
+                lista.add(aviso);
+            }
+
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
     
 }

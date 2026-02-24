@@ -11,11 +11,17 @@ C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\StatusDAO.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\TaxaDAO.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\UnidadeDAO.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\model\AvisoModel.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\model\MoradorModel.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\model\OcorrenciaModel.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\model\ReservaModel.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\model\TaxaModel.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaCadastrarMorador.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaCriarAvisos.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaCriarOcorrencia.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaCriarReservas.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaCriarTaxas.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaEditarTaxas.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaExcluirMorador.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaInicial.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaLogin.java

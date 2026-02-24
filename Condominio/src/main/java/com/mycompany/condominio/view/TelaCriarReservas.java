@@ -6,7 +6,6 @@ package com.mycompany.condominio.view;
 import com.mycompany.condominio.dao.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;

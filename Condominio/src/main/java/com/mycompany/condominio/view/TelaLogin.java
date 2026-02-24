@@ -216,9 +216,9 @@ public class TelaLogin extends javax.swing.JFrame {
                 /*JOptionPane.showMessageDialog(null, "Login realizado com sucesso");*/
                 // aqui você pode abrir outra tela
                 Parametro parametro = Parametro.getInstance();
-                System.out.println(rs.getInt("id_bloco"));
+                //System.out.println(rs.getInt("id_bloco"));
                 String bloco = BlocoDAO.blocoUsuario(rs.getInt("id_bloco"));
-                System.out.println(bloco);
+                //System.out.println(bloco);
                 parametro.setNomeBloco(bloco);
                 parametro.setIdBloco(rs.getInt("id_bloco"));
                 parametro.setIdSindico(rs.getInt("id_sindico"));

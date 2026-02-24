@@ -7,6 +7,9 @@ import com.mycompany.condominio.dao.*;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import com.mycompany.condominio.model.*;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -193,18 +196,39 @@ public class TelaVerReservas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        ReservaDAO dao = new ReservaDAO();
+        List<ReservaModel> lista;
+
+        String area = jList1.getSelectedValue();
+
+        if (area == null) {
+            lista = dao.buscarReservas(null);      
+        } else {
+            lista = dao.buscarReservas(area);      
+        }
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        
-       /*for (Ocorrencia o : lista) {
-        model.addRow(new Object[]{
-            o.getId(),
-            o.getData(),
-            o.getHoraInicio(),
-            o.getHoraFim(),
-            o.getMorador(),
-            o.getArea()
-        });*/
+        model.setRowCount(0); 
+
+        for (ReservaModel r : lista) {
+            model.addRow(new Object[]{
+                r.getIdReserva(),
+                r.getDataReserva(),
+                r.getHorarioInicio(),
+                r.getHorarioFim(),
+                r.getCpfMorador(),
+                r.getArea()
+            });
+        }
+
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Nenhuma reserva encontrada.",
+                "Resultado",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }
 
 
 // TODO add your handling code here:
