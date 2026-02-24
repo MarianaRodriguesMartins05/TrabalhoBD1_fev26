@@ -33,7 +33,6 @@ com\mycompany\condominio\view\TelaCriarOcorrencia.class
 com\mycompany\condominio\view\TelaVerMorador.class
 com\mycompany\condominio\view\TelaVerReservas$3.class
 com\mycompany\condominio\view\TelaInicial$7.class
-com\mycompany\condominio\view\TelaCriarReservas$6.class
 com\mycompany\condominio\view\TelaInicial$1.class
 com\mycompany\condominio\dao\BlocoDAO.class
 com\mycompany\condominio\view\TelaVerOcorrencias$2.class
@@ -49,9 +48,9 @@ com\mycompany\condominio\view\TelaCadastrarMorador$4.class
 com\mycompany\condominio\dao\SindicoDAO.class
 com\mycompany\condominio\view\TelaVerOcorrencias$4.class
 com\mycompany\condominio\view\TelaCriarAvisos$5.class
-com\mycompany\condominio\view\TelaCriarReservas$5.class
 com\mycompany\condominio\view\TelaLogin.class
 com\mycompany\condominio\view\TelaInicial$12.class
+com\mycompany\condominio\dao\TaxaDAO.class
 com\mycompany\condominio\dao\UnidadeDAO.class
 com\mycompany\condominio\view\TelaCriarTaxas$1.class
 com\mycompany\condominio\view\TelaVerOcorrencias$1.class
@@ -70,11 +69,13 @@ com\mycompany\condominio\view\TelaVerOcorrencias.class
 com\mycompany\condominio\view\TelaCriarAvisos$4.class
 com\mycompany\condominio\view\TelaCriarOcorrencia$4.class
 com\mycompany\condominio\view\TelaVerReservas$1.class
+com\mycompany\condominio\dao\ReservaDAO.class
 com\mycompany\condominio\view\TelaCriarTaxas$6.class
 com\mycompany\condominio\view\TelaCriarAvisos$1.class
 com\mycompany\condominio\view\TelaCriarReservas$1.class
 com\mycompany\condominio\view\TelaExcluirMorador.class
 com\mycompany\condominio\view\TelaVerAvisos$3.class
+com\mycompany\condominio\dao\OcorrenciaDAO.class
 com\mycompany\condominio\dao\StatusDAO.class
 com\mycompany\condominio\view\TelaInicial$6.class
 com\mycompany\condominio\view\TelaCadastrarMorador$1.class

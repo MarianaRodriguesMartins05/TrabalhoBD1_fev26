@@ -19,7 +19,6 @@ public class MoradorDAO {
     public static String cadastrarMorador(String nome, String cpf, String telefone, String email, Integer unidade) {
         try {
             Integer idUnidade = UnidadeDAO.bucarIdUnidade(unidade);
-            System.out.println(idUnidade);
             Connection con = Conexao.conectar();
             String sql = "INSERT INTO morador (nome, cpf, telefone, email, id_unidade) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);

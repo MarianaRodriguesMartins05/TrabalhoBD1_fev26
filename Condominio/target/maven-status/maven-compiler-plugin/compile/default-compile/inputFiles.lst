@@ -4,9 +4,12 @@ C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\BlocoDAO.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\Conexao.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\MoradorDAO.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\OcorrenciaDAO.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\Parametro.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\ReservaDAO.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\SindicoDAO.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\StatusDAO.java
+C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\TaxaDAO.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\dao\UnidadeDAO.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaCadastrarMorador.java
 C:\Users\Mariana\Documents\GitHub\TrabalhoBD1_fev26\Condominio\src\main\java\com\mycompany\condominio\view\TelaCriarAvisos.java

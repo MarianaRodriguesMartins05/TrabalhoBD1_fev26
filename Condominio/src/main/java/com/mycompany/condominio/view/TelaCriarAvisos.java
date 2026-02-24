@@ -25,8 +25,7 @@ public class TelaCriarAvisos extends javax.swing.JFrame {
     initComponents();
 
     jLabel7.setText(Parametro.getInstance().getNomeBloco());
-    setResizable(false);
-    setLocationRelativeTo(null);
+    
 
     try {
         MaskFormatter mask = new MaskFormatter("##/##/####");
@@ -39,6 +38,8 @@ public class TelaCriarAvisos extends javax.swing.JFrame {
     } catch (ParseException e) {
         e.printStackTrace();
     }
+    setResizable(false);
+    setLocationRelativeTo(null);
 }
 
     /**
@@ -213,29 +214,29 @@ public class TelaCriarAvisos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-        String titulo = jTextField1.getText().trim();
-        String mensagem = jTextField2.getText().trim();
+            String titulo = jTextField1.getText();
+            String mensagem = jTextField2.getText();
 
-        jFormattedTextField2.commitEdit();
-        String dataTexto = jFormattedTextField2.getText();
+            jFormattedTextField2.commitEdit();
+            String dataTexto = jFormattedTextField2.getText();
 
-        if (dataTexto.contains("_")) {
-            JOptionPane.showMessageDialog(null, "Preencha a data corretamente!");
-            return;
+            if (dataTexto.contains("_")) {
+                JOptionPane.showMessageDialog(null, "Preencha a data corretamente!");
+                return;
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date dataUtil = sdf.parse(dataTexto);
+            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+
+
+             String resultado = AvisosDAO.cadastrarAviso(titulo, mensagem, dataSql);
+
+            JOptionPane.showMessageDialog(null, resultado);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date dataUtil = sdf.parse(dataTexto);
-        java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
-
-        
-         String resultado = AvisosDAO.cadastrarAviso(titulo, mensagem, dataSql);
-
-        JOptionPane.showMessageDialog(null, resultado);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed

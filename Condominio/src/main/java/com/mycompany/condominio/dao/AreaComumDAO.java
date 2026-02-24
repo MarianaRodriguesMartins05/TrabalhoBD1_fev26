@@ -31,4 +31,23 @@ public class AreaComumDAO {
         return nomeArea;
     }
     
+    
+    public static Integer bucarIdArea (String nomeArea) {
+        Integer resultIdArea = null;
+        try {
+            Connection con = Conexao.conectar();
+            String sql = "SELECT id_area FROM area_comum where nome_area=? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nomeArea);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                resultIdArea = rs.getInt("id_area");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultIdArea;
+    }
+    
 }

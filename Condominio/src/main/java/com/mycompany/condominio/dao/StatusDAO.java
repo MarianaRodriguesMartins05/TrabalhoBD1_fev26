@@ -32,4 +32,22 @@ public class StatusDAO {
         return status;
     }
     
+    public static Integer bucarIdStatus (String status) {
+        Integer resultIdStatus = null;
+        try {
+            Connection con = Conexao.conectar();
+            String sql = "SELECT id_status FROM status where status=? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, status);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                resultIdStatus = rs.getInt("id_status");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultIdStatus;
+    }
+    
 }

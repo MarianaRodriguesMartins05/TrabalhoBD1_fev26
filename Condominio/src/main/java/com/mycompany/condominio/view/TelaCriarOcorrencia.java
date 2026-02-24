@@ -4,8 +4,13 @@
  */
 package com.mycompany.condominio.view;
 import com.mycompany.condominio.dao.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -25,6 +30,19 @@ public class TelaCriarOcorrencia extends javax.swing.JFrame {
             modelo.addElement(String.valueOf(id));
         }
         jList1.setModel(modelo);
+        
+        
+        try {
+            MaskFormatter mask = new MaskFormatter("##/##/####");
+            mask.setPlaceholderCharacter('_');
+
+            jFormattedTextField1.setFormatterFactory(
+                new DefaultFormatterFactory(mask)
+            );
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -190,6 +208,30 @@ public class TelaCriarOcorrencia extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            String descricao = jTextField1.getText();
+            Integer unidade = Integer.parseInt(jList1.getSelectedValue());
+
+            jFormattedTextField1.commitEdit();
+            String dataTexto = jFormattedTextField1.getText();
+
+            if (dataTexto.contains("_")) {
+                JOptionPane.showMessageDialog(null, "Preencha a data corretamente!");
+                return;
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date dataUtil = sdf.parse(dataTexto);
+            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+
+
+             String resultado = OcorrenciaDAO.cadastrarOcorrencia(descricao, dataSql,unidade);
+
+            JOptionPane.showMessageDialog(null, resultado);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

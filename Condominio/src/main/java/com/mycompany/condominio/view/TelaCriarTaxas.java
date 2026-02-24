@@ -4,8 +4,14 @@
  */
 package com.mycompany.condominio.view;
 import com.mycompany.condominio.dao.*;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -32,6 +38,19 @@ public class TelaCriarTaxas extends javax.swing.JFrame {
             modelo2.addElement(status);
         }
         jList2.setModel(modelo2);
+        
+        try {
+        MaskFormatter mask = new MaskFormatter("##/##/####");
+        mask.setPlaceholderCharacter('_');
+
+        jFormattedTextField1.setFormatterFactory(
+            new DefaultFormatterFactory(mask)
+        );
+
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+        
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -251,6 +270,32 @@ public class TelaCriarTaxas extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Float valor = Float.parseFloat(jTextField1.getText());
+            String descricao = jTextField2.getText();
+            String status = jList2.getSelectedValue();
+            Integer unidade = Integer.parseInt(jList1.getSelectedValue());
+            jFormattedTextField1.commitEdit();
+            String dataTexto = jFormattedTextField1.getText();
+            
+
+            if (dataTexto.contains("_")) {
+                JOptionPane.showMessageDialog(null, "Preencha a data corretamente!");
+                return;
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date dataUtil = sdf.parse(dataTexto);
+            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+
+
+             String resultado = TaxaDAO.criarTaxa(valor, dataSql, descricao, unidade, status);
+
+            JOptionPane.showMessageDialog(null, resultado);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
