@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `condominio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `condominio`;
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
--- Host: localhost    Database: condominio
+-- Host: 127.0.0.1    Database: condominio
 -- ------------------------------------------------------
--- Server version	8.0.38
+-- Server version	8.0.44
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -59,7 +57,7 @@ CREATE TABLE `aviso` (
   PRIMARY KEY (`id_aviso`),
   KEY `id_sindico` (`id_sindico`),
   CONSTRAINT `aviso_ibfk_1` FOREIGN KEY (`id_sindico`) REFERENCES `sindico` (`id_sindico`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +66,7 @@ CREATE TABLE `aviso` (
 
 LOCK TABLES `aviso` WRITE;
 /*!40000 ALTER TABLE `aviso` DISABLE KEYS */;
+INSERT INTO `aviso` VALUES (1,'aaaa','aaaaaaaa','2026-02-21',2),(2,'teste','teste','2026-02-21',2),(3,'Falta de água','Prezados...','2026-02-24',2);
 /*!40000 ALTER TABLE `aviso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,6 +119,7 @@ CREATE TABLE `morador` (
 
 LOCK TABLES `morador` WRITE;
 /*!40000 ALTER TABLE `morador` DISABLE KEYS */;
+INSERT INTO `morador` VALUES ('00000000000','Junior Almeida Campos','1111111111','junior@gmail.com',32),('44444444444','Mariana Rodrigues','11111111111','mari@gmail.com',25);
 /*!40000 ALTER TABLE `morador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,12 +134,11 @@ CREATE TABLE `ocorrencia` (
   `id_ocorrencia` int NOT NULL AUTO_INCREMENT,
   `data_ocorrencia` date NOT NULL,
   `descricao` text NOT NULL,
-  `status` enum('ABERTA','RESOLVIDA') NOT NULL,
   `id_unidade` int NOT NULL,
   PRIMARY KEY (`id_ocorrencia`),
   KEY `id_unidade` (`id_unidade`),
   CONSTRAINT `ocorrencia_ibfk_1` FOREIGN KEY (`id_unidade`) REFERENCES `unidade` (`id_unidade`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,6 +147,7 @@ CREATE TABLE `ocorrencia` (
 
 LOCK TABLES `ocorrencia` WRITE;
 /*!40000 ALTER TABLE `ocorrencia` DISABLE KEYS */;
+INSERT INTO `ocorrencia` VALUES (1,'2026-02-20','teste',20),(2,'2026-02-23','barulho',20),(3,'2026-02-24','Muito barulho no segundo andar',20);
 /*!40000 ALTER TABLE `ocorrencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,9 +168,9 @@ CREATE TABLE `reserva` (
   PRIMARY KEY (`id_reserva`),
   UNIQUE KEY `id_area` (`id_area`,`data_reserva`,`horario_inicio`,`horario_fim`),
   KEY `cpf_morador` (`cpf_morador`),
-  CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`cpf_morador`) REFERENCES `morador` (`cpf`),
+  CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`cpf_morador`) REFERENCES `morador` (`cpf`) ON DELETE CASCADE,
   CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`id_area`) REFERENCES `area_comum` (`id_area`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,6 +213,30 @@ INSERT INTO `sindico` VALUES (1,'Carlos Almeida','carlos.sindico','123456',1),(2
 UNLOCK TABLES;
 
 --
+-- Table structure for table `status`
+--
+
+DROP TABLE IF EXISTS `status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `status` (
+  `id_status` int NOT NULL AUTO_INCREMENT,
+  `status` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_status`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status`
+--
+
+LOCK TABLES `status` WRITE;
+/*!40000 ALTER TABLE `status` DISABLE KEYS */;
+INSERT INTO `status` VALUES (1,'Em aberto'),(2,'Paga'),(3,'Em atraso'),(4,'Cancelada');
+/*!40000 ALTER TABLE `status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `taxa`
 --
 
@@ -223,13 +247,15 @@ CREATE TABLE `taxa` (
   `id_taxa` int NOT NULL AUTO_INCREMENT,
   `valor` decimal(10,2) NOT NULL,
   `data_vencimento` date NOT NULL,
-  `status_pagamento` enum('PENDENTE','PAGA','ATRASADA','CANCELADA') NOT NULL,
   `id_unidade` int NOT NULL,
   `descricao` varchar(100) NOT NULL,
+  `id_status` int NOT NULL,
   PRIMARY KEY (`id_taxa`),
   KEY `id_unidade` (`id_unidade`),
+  KEY `fk_taxa_status` (`id_status`),
+  CONSTRAINT `fk_taxa_status` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`),
   CONSTRAINT `taxa_ibfk_1` FOREIGN KEY (`id_unidade`) REFERENCES `unidade` (`id_unidade`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,6 +264,7 @@ CREATE TABLE `taxa` (
 
 LOCK TABLES `taxa` WRITE;
 /*!40000 ALTER TABLE `taxa` DISABLE KEYS */;
+INSERT INTO `taxa` VALUES (1,200.00,'2026-02-25',21,'Pagamento da conta de água ',2),(2,200.00,'2026-02-25',21,'Pagamento da conta de água ',3),(3,150.00,'2026-02-24',20,'Conta de gás',4),(4,2000.00,'2026-02-24',20,'sesjfy,kdfkf',3),(5,255.00,'2012-12-12',20,'feshfslhfe',4);
 /*!40000 ALTER TABLE `taxa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,4 +305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-10 22:31:52
+-- Dump completed on 2026-02-24 21:52:14
